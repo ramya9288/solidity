@@ -13,32 +13,46 @@
      fieldset{
           width=500px;
           textalign=center;
+}body {
+    background-image: url("bk.jpeg");
+	 background-repeat: no-repeat;
+	 background-position: left center;
+	 background-repeat: repeat-x;
+}
+button{
+	background-color:Tomato;
+}
+h3 {
+	
+}
+input{
+	background-color:lightgreen;
 }
 </style>
 </head>
-  <body bgcolor=yellow>
+  <body bgcolor=lightbllue>
 
       <h1> <center>Bank</h1>
-     
-	<label><b><center>Amount<input id="amount" type="number" /><br><br>
-  	<label><button id="deposit" onclick="deposit1()">deposit</button>
-    	<label><button id="withdraw" onclick="withdraw2()">withdraw</button><br><br><br>
-   	<label> <button id="balance" onclick="bln();">balance</button>owner<input id="result"><br><br><br>
-    	<label>To <input id="to" type="text"/>
-        <label>Amount<input id="amount1"type="number"/><br><br>
-   	<label><button id="transfer" onclick="transfer1()">transfer</button><br><br><br>
-    	<label>From<input id="from" type="text"/>
-    	<label>To <input id="to2" type="text"/>
-    	<label>Amount<input id="amount2"type="number"/><br><br>
-        <label><button id="transferfrom" onclick="transferfrom1()">transferfrom</button><br><br><br>
-        <label> Spender <input id="spender" type="text"/>
-    	<label>Amount<input id="amount3"type="text"/><br><br>
-        <label><button id="approve" onclick="approve1()">approve</button><br><br><br>
-	<label> Owner<input id="owner1" type="text"/>
-	<label> Spender<input id="spender1" type="text"/><br><br>
-	<label><button id="allowance" onclick="allowance1()">allowance</button><br><br>
+        
+	<label><h2><b><center><font color="green">Amount</font><input id="amount" type="number" /><br><br>
+  	<label><button id="deposit" onclick="deposit1()"><font color="blue"><h3>Deposit</font></button>
+    	<label><button id="withdraw" onclick="withdraw2()"><font color="blue"><h3>Withdraw</font></button><br><br><br>
+   	<label><button id="balance" onclick="bln();"><font color="blue"><h3>Balance</h3></font></button><font color="green">owner</font><input id="result"><br><br><br>
+    	<label><font color="green">To</font ><input id="to" type="text"/>
+        <label><font color="green">Amount</font><input id="amount1"type="number"/><br><br>                                                                      
+   	<label><button id="transfer" onclick="transfer1()"><font color="blue"><h3>Transfer</h3></font></button><br><br><br>
+    	<label><font color="green">From</font><input id="from" type="text"/>
+    	<label><font color="green">To</font> <input id="to2" type="text"/>
+    	<label><font color="green">Amount</font><input id="amount2"type="number"/><br><br>
+        <label><button id="transferfrom" onclick="transferfrom1()"><font color="blue"><h3>Transferfrom</h3></font></button><br><br><br>
+        <label> <font color="green">Spender</font> <input id="spender" type="text"/>
+    	<label><font color="green">Amount</font><input id="amount3"type="text"/><br><br>
+        <label><button id="approve" onclick="approve1()"><font color="blue"><h3>Approve</font></button><br><br><br>
+	<label> <font color="green">Owner</font><input id="owner1" type="text"/>
+	<label><font color="green"> Spender</font><input id="spender1" type="text"/><br><br>
+	<label><button id="allowance" onclick="allowance1()"><font color="blue"><h3>Allowance</font></button><br><br>
 	<pre id ="hashresult"></pre>
-	previous Hash : <pre id"prehashresult"></pre>
+	previous Hash : <pre id"prehashresult"></h2></pre>
 
   </body>
 <script>
@@ -257,7 +271,7 @@
 		"type": "event"
 	}
 ]);
-  var sybex = sybexcon.at('0xf34e141ad6cb4c7a6da264ccdc2fb7927b80a2a5');
+  var sybex = sybexcon.at('0xa40059bc32960b32abf77c0411e6857a03f2f9e7');
      var output = document.getElementById('hashresult');
      var preoutput = document.getElementById('prehashresult');
      var amt=document.getElementById('amount');
