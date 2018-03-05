@@ -2,38 +2,49 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Bank</title>
+    <title>Test</title>
     <script src="web3.min.js"></script>
-    
-  </head>
-  <body bgcolor="green">
-<h1><legend><center>BANK WALLET</center></legend></h1>
+    <style>
+     lable{
+          display:block;
+          padding:100px;
+          spacing:90px;
+         }
+     fieldset{
+          width=500px;
+          textalign=center;
+}
+</style>
+</head>
+  <body bgcolor=yellow>
 
-  <label>Owner address: <input id="oa" type="text" /></label><br>
-<label>New address:<input id="na" type="text" /></label><br>
-<label>Amount:<input id="a" type="number" /><br></label>
-<label>From address:<input id="fa"  type="text" /><br></label>
-<label>To address:<input id="ta"  type="text" /><br></label>
-<label>Spender:<input id="s"  type="text" /><br></label>
-<label>Result:<input id="r"  type="text" /><br></label>
+      <h1> <center>Bank</h1>
+     
+	<label><b><center>Amount<input id="amount" type="number" /><br><br>
+  	<label><button id="deposit" onclick="deposit1()">deposit</button>
+    	<label><button id="withdraw" onclick="withdraw2()">withdraw</button><br><br><br>
+   	<label> <button id="balance" onclick="bln();">balance</button>owner<input id="result"><br><br><br>
+    	<label>To <input id="to" type="text"/>
+        <label>Amount<input id="amount1"type="number"/><br><br>
+   	<label><button id="transfer" onclick="transfer1()">transfer</button><br><br><br>
+    	<label>From<input id="from" type="text"/>
+    	<label>To <input id="to2" type="text"/>
+    	<label>Amount<input id="amount2"type="number"/><br><br>
+        <label><button id="transferfrom" onclick="transferfrom1()">transferfrom</button><br><br><br>
+        <label> Spender <input id="spender" type="text"/>
+    	<label>Amount<input id="amount3"type="text"/><br><br>
+        <label><button id="approve" onclick="approve1()">approve</button><br><br><br>
+	<label> Owner<input id="owner1" type="text"/>
+	<label> Spender<input id="spender1" type="text"/><br><br>
+	<label><button id="allowance" onclick="allowance1()">allowance</button><br><br>
+	<pre id ="hashresult"></pre>
+	previous Hash : <pre id"prehashresult"></pre>
 
-<button id="b1" onclick="deposit()">deposit</button>
-<button id="b2" onclick="withdraw()">withdraw</button>
-<button id="b3" onclick="bal()">view balance</button>
-<button id="b4" onclick="transferFrom()">transfer from</button>
-<button id="b5" onclick="approve()">approve</button>
-<button id="b6" onclick="allowance()">allowance</button>
-<button id="b7" onclick="transfer()">transfer</button>
-<button id="b8" onclick="transferOwnership()">transfer ownership</button>
-
-
-    <pre id="hashresult"></pre>
-    Previous Hash : <pre id="prehashresult"></pre>
   </body>
 <script>
    
         web3.eth.defaultAccount = web3.eth.accounts[0];
-        var bwcon = web3.eth.contract([
+        var sybexcon = web3.eth.contract([
 	{
 		"constant": false,
 		"inputs": [
@@ -107,25 +118,12 @@
 			}
 		],
 		"name": "withdraw",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
+		"outputs": [
 			{
-				"name": "_value",
+				"name": "",
 				"type": "uint256"
-			},
-			{
-				"name": "_owner",
-				"type": "address"
 			}
 		],
-		"name": "deposit",
-		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -181,7 +179,12 @@
 			}
 		],
 		"name": "deposit",
-		"outputs": [],
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -208,37 +211,6 @@
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "previousOwner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "OwnershipTransferred",
-		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -285,226 +257,32 @@
 		"type": "event"
 	}
 ]);
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "withdraw",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_value",
-				"type": "uint256"
-			},
-			{
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "deposit",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "balanceOf",
-		"outputs": [
-			{
-				"name": "balance",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "transfer",
-		"outputs": [
-			{
-				"name": "success",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "deposit",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"name": "_spender",
-				"type": "address"
-			}
-		],
-		"name": "allowance",
-		"outputs": [
-			{
-				"name": "remaining",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "previousOwner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "OwnershipTransferred",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "_from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "Transfer",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "_spender",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "Approval",
-		"type": "event"
-	}
-]
-var oadd=document.getElementById("oa");
-var nadd=document.getElementById("na");
-var amnt=document.getElementById("a");
-var fromadd=document.getElementById("fa");
-var toadd=document.getElementById("ta");
-var spend = document.getElementById("s");
-var res = document.getElementById("r");
-var output=document.getElementById('hashresult');
-var preoutput = document.getElementById('prehashresult');
+  var sybex = sybexcon.at('0xf34e141ad6cb4c7a6da264ccdc2fb7927b80a2a5');
+     var output = document.getElementById('hashresult');
+     var preoutput = document.getElementById('prehashresult');
+     var amt=document.getElementById('amount');
+     var to1=document.getElementById('to');
+     var amt1=document.getElementById('amount1');
+     var from=document.getElementById('from');
+     var to2=document.getElementById('to2');
+     var amt2=document.getElementById('amount2');
+     var spender=document.getElementById('spender');
+     var amt3=document.getElementById('amount3');
+     var owr1=document.getElementById('owner1');
+     var sndr1=document.getElementById('spender1');
+     var resl=document.getElementById('result');
+     if(!web3.isConnected()) {
+  
+        console.log("Ok");
+        
+      } else {
+        console.log("no");
+      }
 
-var bw=bwcon.at('0xf08fb1ff8b21fbfe0f4de0b91f9dbc8e1228b7c0')
- web3.version.getNetwork((err, netId) => {
+      web3.version.getNetwork((err, netId) => {
             switch (netId) {
               case "1":
-                console.log('This is main net')
+                console.log('This is mainnet')
                 break
               case "2":
                 console.log('This is the deprecated Morden test network.')
@@ -522,92 +300,100 @@ var bw=bwcon.at('0xf08fb1ff8b21fbfe0f4de0b91f9dbc8e1228b7c0')
                 console.log('This is an unknown network.')
             }
         })
-
-function deposit(){
-        
-        return bw.deposit(amnt.value,oadd.value,function(err,res){
+   function deposit1()
+     {
+     alert(Number(amt.value));
+     return sybex.deposit(Number(amt.value),function(err,res){
                 if (!err) {
-                    output.innerText = res;
+                  alert("success");
+		 output.innerText = res;
                 }
                 else{
                   output.innerText = "Error";
                 }
               });
-            }
-function withdraw()
-	{
-	return bw.withdraw(amnt.value,function(err,res){
-                   if (!err) {
-                      output.innerText = res;
-                }
-                else{
-                     output.innerText = "Error";
-                }
-});
-function transfer()
-	{
-	return bw.transfer(toadd.value,amnt.value,function(err,res)
-	 if(!err) {
-                    output.innerText = res;
+            
+    }
+	function withdraw2()
+   {
+    
+     return sybex.withdraw(Number(amt.value),function(err,res){
+                if (!err) {
+                    alert("success");
+                   output.innerText = res;
                 }
                 else{
                   output.innerText = "Error";
                 }
               });
+    }
+   function bln()
+     {
+     return sybex.balanceOf(resl.value,function(err,res){
+                if (!err) {
+                alert("success");
+		
+                     output.innerText = res;
+                   
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+            
+    }
+ function transfer1()
+   {
+    
+     return sybex.transfer(to1.value,Number(amt1.value),function(err,res){
+                if (!err) {
+                     alert("success");
+		 output.innerText = res;
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+    }
+    function transferfrom1()
+   {
+    
+     return sybex.transferFrom(from.value,to2.value,Number(amt2.value),function(err,res){
+                if (!err) {
+                     alert("success");
+			 output.innerText = res;
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+    }
+ function approve1()
+   {
+    
+     return sybex.approve(spender.value,amt3.value,function(err,res){
+                if (!err) {
+                     alert("success");
+			 output.innerText = res;
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+    }
+   function allowance1()
+   {
+    
+     return sybex.allowance(owr1.value,sndr1.value,function(err,res){
+                if (!err) {
+                     alert(res);
+                     output.innerText = res;
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+    }
 
-
-}
-function bal()
-	{
-	return bw.balaneOf(oadd.value,amnt.value,function(err,res)
-	 if(!err) {
-                    output.innerText = res;
-                }
-                else{
-                  output.innerText = "Error";
-                }
-              });
-function approve()
-	{
-	return bw.approve(spend.value,amnt.value,function(err,res)
-	 if(!err) {
-                    output.innerText = res;
-                }
-                else{
-                  output.innerText = "Error";
-                }
-              });
-function allowance()
-	{
-	return bw.allowance(oadd.value,spend.value,function(err,res)
-	 if(!err) {
-                    output.innerText = res;
-                }
-                else{
-                  output.innerText = "Error";
-                }
-              });
-function transferOwnership()
-	{
-	return bw.transferOwnership(na.value,function(err,res)
-	 if(!err) {
-                    output.innerText = res;
-                }
-                else{
-                  output.innerText = "Error";
-                }
-              });
-function transferFrom()
-	{
-	return bw.transferFrom(fromadd.value,toadd.value,amnt.value,function(err,res)
-	 if(!err) {
-                    output.innerText = res;
-                }
-                else{
-                  output.innerText = "Error";
-                }
-              });
-}
-        
 </script>
 </html>
