@@ -19,12 +19,9 @@ contract StandardToken is Token{
      mapping(address => mapping(address => uint256)) alowed;
      uint256 public totalSupply;
      
-     modifier check(){
-         require(msg.sender==owner);
-         _;
-     }
+  
      
-     function deposit(uint256 _value)public  check() returns(uint256 ){
+     function deposit(uint256 _value)public   returns(uint256 ){
          balances[msg.sender] += _value;
          return balances[msg.sender];
      } 
@@ -38,7 +35,7 @@ contract StandardToken is Token{
              return true;
        }
      
-      function withdraw(uint256 _value)public check()  returns(uint256){
+      function withdraw(uint256 _value)public   returns(uint256){
         balances[msg.sender]-=_value;
         return balances[msg.sender];
       }
