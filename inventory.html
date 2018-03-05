@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <script src="web3.min.js"></script>
+    <style>
+     lable{
+          display:block;
+          padding:100px;
+          spacing:90px;
+         }
+     fieldset{
+          width=500px;
+          textalign=center;
+}
+</style>
+</head>
+  <body bgcolor= violet>
+<h1> <center>Shop</h1>
+     
+
+    <label><center>product id:<input id="pid" type="number" /></label><br><br> 
+   <label> price<input id="price"  type="number"/></label>
+    <label>count<input id="count" type="number"/></label>
+    <label>name<input id="name" type="string"/></label>
+    <button id="prod" onclick="sale()">product</button><br>
+    <label>quantity <input id="quan" type="number"/></label>
+     <label>product id <input id="proid" type="number"/></label>
+    <label><button id="cust" onclick="custo()">customer</label></button>
+
+</body>
+<script>
+
+     web3.eth.defaultAccount = web3.eth.accounts[0];
+        var sybexcon = web3.eth.contract([
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "quan",
+				"type": "uint256"
+			},
+			{
+				"name": "pid",
+				"type": "uint256"
+			}
+		],
+		"name": "customer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_price",
+				"type": "uint256"
+			},
+			{
+				"name": "pcount",
+				"type": "uint256"
+			},
+			{
+				"name": "pid",
+				"type": "uint256"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			}
+		],
+		"name": "product",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	}
+]);
+      var inven = sybexcon.at('0x83e3b9fb4a413ee6829bb72f85034431ce3102c4');
+     var output = document.getElementById('hashresult');
+     var preoutput = document.getElementById('prehashresult');
+     var pid1=document.getElementById('pid');
+     var proprice=document.getElementById('price');
+     var procount=document.getElementById('count');
+     var proname=document.getElementById('name');
+     var cusquan=document.getElementById('quan');
+      var proid1=document.getElementById('proid');
+     if(!web3.isConnected()) {
+  
+        console.log("Ok");
+        
+      } else {
+        console.log("no");
+      }
+   	web3.version.getNetwork((err, netId) => {
+            switch (netId) {
+              case "1":
+                console.log('This is mainnet')
+                break
+              case "2":
+                console.log('This is the deprecated Morden test network.')
+                break
+              case "3":
+                console.log('This is the ropsten test network.')
+                break
+              case "4":
+                console.log('This is the Rinkeby test network.')
+                break
+              case "42":
+                console.log('This is the Kovan test network.')
+                break
+              default:
+                console.log('This is an unknown network.')
+            }
+        })
+   function sale()
+     {
+     return inven.product(Number(proprice.value),Number(procount.value),Number(pid1.value),proname.value,function(err,res){
+                if (!err) {
+                  alert("success");
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+            
+    }
+
+   function custo()
+     {
+    
+     return inven.customer(Number(cusquan.value),Number(proid1.value),function(err,res){
+                if (!err) { 
+                     alert(res);
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+            
+    }
+</script>
+</html>
