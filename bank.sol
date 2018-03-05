@@ -24,41 +24,33 @@ contract StandardToken is Token{
          _;
      }
      
-     function deposit(uint256 _value)public  returns(uint256 ){
+     function deposit(uint256 _value)public  check() returns(uint256 ){
          balances[msg.sender] += _value;
          return balances[msg.sender];
      } 
      
      function transfer(address _to,uint256 _value) returns(bool success) {
-         if (balances[msg.sender] >= _value && _value > 0 ){
+         require(balances[msg.sender] >= _value && _value > 0 );
              
              balances[msg.sender] -= _value;
              balances[_to] += _value;
              Transfer(msg.sender,_to,_value);
              return true;
-         }
-         else{
-             return false;
-         }
-     }
+       }
      
-      function withdraw(uint256 _value)public   returns(uint256){
+      function withdraw(uint256 _value)public check()  returns(uint256){
         balances[msg.sender]-=_value;
         return balances[msg.sender];
       }
      
      function transferFrom(address _from,address _to,uint256 _value) returns(bool success) {
-         if (balances[_from] >= _value && _value > 0 && alowed[_from][_to] >= _value){
+        require (balances[_from] >= _value && _value > 0 && alowed[_from][_to] >= _value);
              
              balances[_from] -= _value;
              balances[_to] += _value;
              alowed[_from][_to] -= _value;
              Transfer(_from,_to,_value);
              return true;
-         }
-         else{
-             return false;
-         }
      }
      
      function balanceOf(address _owner) constant returns(uint256 balance){
@@ -86,6 +78,7 @@ contract TestCoin is StandardToken{
     
      function TestCoin(){
         totalSupply = 5000;
+        balances[msg.sender]=totalSupply;
         name = "MNW Token";
         symbol = "MNW";
         decimals = 18;
