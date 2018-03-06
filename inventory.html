@@ -16,7 +16,7 @@
 }
 </style>
 </head>
-  <body bgcolor= violet>
+  <body bgcolor= purple>
 <h1> <center>Shop</h1>
      
 
@@ -34,6 +34,32 @@
 
      web3.eth.defaultAccount = web3.eth.accounts[0];
         var sybexcon = web3.eth.contract([
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_price",
+				"type": "uint256"
+			},
+			{
+				"name": "pcount",
+				"type": "uint256"
+			},
+			{
+				"name": "pid",
+				"type": "uint256"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			}
+		],
+		"name": "product",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"constant": true,
 		"inputs": [
@@ -62,39 +88,13 @@
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_price",
-				"type": "uint256"
-			},
-			{
-				"name": "pcount",
-				"type": "uint256"
-			},
-			{
-				"name": "pid",
-				"type": "uint256"
-			},
-			{
-				"name": "name",
-				"type": "string"
-			}
-		],
-		"name": "product",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	}
 ]);
-      var inven = sybexcon.at('0x83e3b9fb4a413ee6829bb72f85034431ce3102c4');
+     var inven = sybexcon.at('0x47947d260c72ed3634adbe5a3fadfc1b381a953e');
      var output = document.getElementById('hashresult');
      var preoutput = document.getElementById('prehashresult');
      var pid1=document.getElementById('pid');
@@ -141,6 +141,7 @@
                   output.innerText = "Error";
                 }
               });
+
             
     }
 
@@ -149,10 +150,10 @@
     
      return inven.customer(Number(cusquan.value),Number(proid1.value),function(err,res){
                 if (!err) { 
-                     alert(res);
+                   alert(res);
                 }
                 else{
-                  output.innerText = "Error";
+                 output.innerText = "Error";
                 }
               });
             
