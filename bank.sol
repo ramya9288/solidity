@@ -19,7 +19,11 @@ contract StandardToken is Token{
      mapping(address => mapping(address => uint256)) alowed;
      uint256 public totalSupply;
      
-  
+     
+     function balanceOf(address _owner) constant returns(uint256 balance){
+         return balances[_owner];
+     }
+     
      
      function deposit(uint256 _value)public   returns(uint256 ){
          balances[msg.sender] += _value;
@@ -50,9 +54,7 @@ contract StandardToken is Token{
              return true;
      }
      
-     function balanceOf(address _owner) constant returns(uint256 balance){
-         return balances[_owner];
-     }
+    
      
      function approve(address _spender,uint256 _value) returns(bool success){
          alowed[msg.sender][_spender] = _value;
