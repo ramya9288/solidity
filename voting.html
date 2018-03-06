@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <script src="web3.min.js"></script>
+    <style>
+     lable{
+          display:block;
+          padding:100px;
+          spacing:90px;
+         }
+     fieldset{
+          width=500px;
+          textalign=center;
+}
+</style>
+</head><body bgcolor= lightgreen>
+<h1> <center>voting</h1>
+     
+
+    <label><center><h2>candidate iid:<input id="iid" type="number" /></label><br><br> 
+   <label> candidate name<input id="name"  type="string"/></label>
+    <label>voter name<input id="vname" type="string"/></label>
+    <label>voter id<input id="vid" type="number"/></label>
+    <button id="pcheck" onclick="check()">pcheck</button><br><br>
+    <label>candidate iid <input id="iid1" type="number"/></label>
+    <label><button id="re" onclick="res1()">res</label></button><br><br>
+      <label><button id="win" onclick="winning1()">wining</label></button>
+     <pre id ="hashresult"></pre>
+	previous Hash : <pre id"prehashresult"></pre></h2>
+
+</body>
+<script>
+
+     web3.eth.defaultAccount = web3.eth.accounts[0];
+        var votescon = web3.eth.contract([
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "wining",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "iid",
+				"type": "uint256"
+			}
+		],
+		"name": "res",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "iid",
+				"type": "uint256"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "_fname",
+				"type": "bytes32"
+			},
+			{
+				"name": "_pid",
+				"type": "uint256"
+			}
+		],
+		"name": "pcheck",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	}
+]);
+     var votes = votescon.at('0x78d2aa81ed7fe466b0ecd39a9957e37eb42d2026');
+     var output = document.getElementById('hashresult');
+     var preoutput = document.getElementById('prehashresult');
+     var iid1=document.getElementById('iid');
+     var name1=document.getElementById('name');
+     var name2=document.getElementById('vname');
+     var vid1=document.getElementById('vid');
+     var voiid=document.getElementById('iid1');
+      
+     if(!web3.isConnected()) {
+  
+        console.log("Ok");
+        
+      } else {
+        console.log("no");
+      }
+   	web3.version.getNetwork((err, netId) => {
+            switch (netId) {
+              case "1":
+                console.log('This is mainnet')
+                break
+              case "2":
+                console.log('This is the deprecated Morden test network.')
+                break
+              case "3":
+                console.log('This is the ropsten test network.')
+                break
+              case "4":
+                console.log('This is the Rinkeby test network.')
+                break
+              case "42":
+                console.log('This is the Kovan test network.')
+                break
+              default:
+                console.log('This is an unknown network.')
+            }
+        })
+   function check()
+     {
+     return votes.pcheck(Number(iid1.value),name1.value,name2.value,Number(vid1.value),function(err,res){
+                if (!err) {
+                 output.innerText=res;
+
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+
+            
+    }
+   function res1()
+     {
+     return votes.res(Number(voiid.value),function(err,res){
+                if (!err) {
+                 output.innerText=res;
+
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+
+            
+    }
+   function winning1()
+     {
+     return votes.wining(function(err,res){
+                if (!err) {
+		 
+                  output.innerText=res;
+                }
+                else{
+                  output.innerText = "Error";
+                }
+              });
+
+            
+    }
+
+
+</script>
+</html>
