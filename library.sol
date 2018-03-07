@@ -19,7 +19,7 @@ contract book{
          lbk[bid].bname=bname;
          lbk[bid].stock=stock;
           lbk[bid].count++;
-          lbk[bid].stock=lbk[bid].stock-1;
+        // lbk[bid].stock=lbk[bid].stock-1;
     }
     function stu(uint256 id,string name)public {
          pbk[id].id=id;
@@ -30,9 +30,21 @@ contract book{
                    return(lbk[bid].count, lbk[bid].bname,lbk[bid].bid);
      }
              
-  
-   function bookre(uint256 bid)public constant returns(uint256){
-    return  (lbk[bid].stock=lbk[bid].stock+1);
+
+   function bookre(uint256 bid,uint256 id)public  {
+     require(lbk[bid].count!=0);
+      // lbk[bid].stock=lbk[bid].stock+lbk[bid].count;
+        lbk[bid].count--;
+         lbk[bid].stock=lbk[bid].stock+lbk[bid].count;
+        
+          // return(lbk[bid].stock);
+    }
+   function balance(uint256 bid,uint256 id)public constant  returns(uint256){
+        
+        require(lbk[bid].stock>0);
+       lbk[bid].stock=lbk[bid].stock-lbk[bid].count;
+        return(lbk[bid].stock);
     }
                    
     }
+    
