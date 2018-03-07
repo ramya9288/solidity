@@ -30,13 +30,7 @@ contract book{
                    return(lbk[bid].count, lbk[bid].bname,lbk[bid].bid);
      }
              
-     function balance(uint256 bid)public constant  returns(uint256){
-        
-        require(lbk[bid].stock>0);
-        lbk[bid].stock=lbk[bid].stock-lbk[bid].count;
-        return(lbk[bid].stock);
-    }
-    
+  
    function bookre(uint256 bid)public constant returns(uint256){
     return  (lbk[bid].stock=lbk[bid].stock+1);
     }
